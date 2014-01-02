@@ -1,0 +1,46 @@
+*HEADING
+Cube problem-mixture of equations with 2 and 9 terms.
+**PS:Input deck modified
+***
+*INCLUDE,INPUT=Nall.inp
+*INCLUDE,INPUT=Eall.inp
+*INCLUDE,INPUT=Nbou.inp
+*INCLUDE,INPUT=Nload.inp
+***
+*MATERIAL,NAME=EL
+*ELASTIC
+210000.,.3
+***
+*SOLID SECTION,MATERIAL=EL,ELSET=Eall
+***
+*BOUNDARY
+Nbou1,2,3
+Nbou2,2,3
+Nbou3,3
+***
+*EQUATION
+**w-dir constraint connecting
+** nodes 78,37,34,40,43,57,62,67 and 72
+9
+78,    3,    1.,   37,    3,       .25,   34,    3,   .25,   40,    3,   .25
+43,    3,   .25,   57,    3,       -.5,   62,    3,   -.5,   67,    3,   -.5
+72,    3,   -.5
+**w-dir constraint connecting
+** nodes 157 and 57
+2
+157,    3,        1.,   57,    3,       -1.,
+***
+*STEP
+*STATIC
+***
+*CLOAD
+Nload,3,1.
+***
+*NODE PRINT,NSET=Nall
+U
+*EL PRINT,ELSET=Eall
+S
+*NODE FILE
+S
+*END STEP
+
